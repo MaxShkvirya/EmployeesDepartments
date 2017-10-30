@@ -1,0 +1,23 @@
+DROP SCHEMA  IF EXISTS departments;
+CREATE SCHEMA  IF NOT EXISTS departments;
+USE departments;
+
+CREATE TABLE departments
+(
+  id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL
+);
+CREATE UNIQUE INDEX id_UNIQUE ON departments (id);
+CREATE UNIQUE INDEX name_UNIQUE ON departments (name);
+CREATE TABLE employees
+(
+  id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  email VARCHAR(255) NOT NULL,
+  age VARCHAR(255) NOT NULL,
+  date DATE NOT NULL,
+  iddepartment INT UNSIGNED NOT NULL,
+  FOREIGN KEY (iddepartment) REFERENCES departments (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX email_UNIQUE ON employees (email);
+CREATE UNIQUE INDEX id_UNIQUE ON employees (id);
+CREATE INDEX id_idx ON employees (iddepartment);
